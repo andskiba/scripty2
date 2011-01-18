@@ -42,7 +42,7 @@
       // Look for an anchor inside each tab. If one exists and correlates
       // to a panel that exists in the document, add the anchor and panel
       // to their respective collections.
-      this.tabs.each( function(li) {
+      this.tabs.each( function(li, index) {
         var anchor = li.down('a');
         if (!anchor) return;
 
@@ -51,7 +51,7 @@
 
         var hash = href.split('#').last(), panel = $(hash);
         
-        li.writeAttribute('tabIndex', '0');
+        li.writeAttribute('tabIndex', index);
 
         if (panel) {
           panel.store('ui.tab', li);
