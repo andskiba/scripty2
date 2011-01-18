@@ -8,7 +8,7 @@
 S2.FX.Operators.Scroll = Class.create(S2.FX.Operators.Base, {
   initialize: function($super, effect, object, options) {
     $super(effect, object, options);
-    this.start = object.scrollTop;
+    this.start = (this.object === document.body) ? document.viewport.getScrollOffsets().top : object.scrollTop;
     this.end = this.options.scrollTo;
   },
 
@@ -17,6 +17,10 @@ S2.FX.Operators.Scroll = Class.create(S2.FX.Operators.Base, {
   },
 
   applyValue: function(value){
-    this.object.scrollTop = value.round();
+      if (this.object === document.body) {
+          window.scrollTo(0, value.round());
+      } else {
+          this.object.scrollTop = value.round();
+      }
   }
 });
